@@ -3,8 +3,6 @@ package main.java.fung.model;
 import java.util.ArrayList;
 
 public class MyMap<K, V> {
-    private ArrayList<K> myKeyList;
-    private ArrayList<V> myValueList;
     private ArrayList<Entry<K, V>> myEntryList;
 
     static class Entry<K, V> {
@@ -28,47 +26,68 @@ public class MyMap<K, V> {
             return this.key;
         }
 
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Entry)) {
+                return false;
+            }
+            Entry<K, V> objEntry = (Entry<K, V>) obj;
+            return this.getKey().equals(objEntry.getKey()) && this.getValue().equals(objEntry.getValue()) ;
+        }
     }
 
     public boolean put(K key, V value) {
-        if (this.myKeyList.contains(key)) {
-            return false;
+        for (Entry<K, V> entry: this.myEntryList) {
+            if (entry.getKey().equals(key)) {
+                return false;
+            }
         }
         Entry<K, V> newEntry = new Entry<>(key, value);
         this.myEntryList.add(newEntry);
-        int index = this.myEntryList.size() - 1;
-        this.myValueList.add(this.myEntryList.get(index).getValue());
-        this.myKeyList.add(this.myEntryList.get(index).getKey());
         return true;
     }
 
     public V get(K key) {
-        int index = this.myKeyList.indexOf(key);
-        return index == -1? null: this.myValueList.get(index);
+        for (Entry<K, V> entry: this.myEntryList) {
+            if (entry.getKey().equals(key)) {
+                return entry.getValue();
+            }
+        }
+        return null;
     }
 
     public V remove(K key) {
-        int index = this.myKeyList.indexOf(key);
+        int index = -1;
+        for (int i = 0; i < this.myEntryList.size(); i++) {
+            if (this.myEntryList.get(i).getKey().equals(key)) {
+                index = i;
+                break;
+            }
+        }
         if (index != -1) {
-            this.myKeyList.remove(index);
-            this.myEntryList.remove(index);
-            return this.myValueList.remove(index);
+            return this.myEntryList.remove(index).getValue();
         }
         return null;
     }
 
     public V replace(K key, V value) {
-        int index = this.myKeyList.indexOf(key);
+        int index = -1;
+        for (int i = 0; i < this.myEntryList.size(); i++) {
+            if (this.myEntryList.get(i).getKey().equals(key)) {
+                index = i;
+                break;
+            }
+        }
         if (index != -1) {
-            this.myEntryList.get(index).setValue(value);
-            return this.myValueList.set(index, value);
+            Entry<K, V> entry = this.myEntryList.get(index);
+            V oldValue = entry.getValue();
+            entry.setValue(value);
+            return oldValue;
         }
         return null;
     }
 
     public MyMap() {
-        this.myKeyList = new ArrayList<>();
-        this.myValueList = new ArrayList<>();
         this.myEntryList = new ArrayList<>();
     }
 }

@@ -11,6 +11,7 @@ public class Main {
         myMap.put(2, "T");
         System.out.println(myMap.replace(3, "T"));
         System.out.println(myMap.get(3));
+        System.out.println(myMap.remove(4));
         System.out.println(myMap.get(2));
     }
 }
