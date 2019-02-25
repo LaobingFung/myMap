@@ -42,7 +42,18 @@ public class MyMap<K, V> {
     }
 
     public V get(K key) {
-        return this.myValueList.get(this.myKeyList.indexOf(key));
+        int index = this.myKeyList.indexOf(key);
+        return index == -1? null: this.myValueList.get(index);
+    }
+
+    public V remove(K key) {
+        int index = this.myKeyList.indexOf(key);
+        if (index != -1) {
+            this.myKeyList.remove(index);
+            this.myEntryList.remove(index);
+            return this.myValueList.remove(index);
+        }
+        return null;
     }
 
     public MyMap() {
