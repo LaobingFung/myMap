@@ -30,6 +30,21 @@ public class MyMap<K, V> {
 
     }
 
+    public boolean put(K key, V value) {
+        if (this.myKeyList.contains(key)) {
+            return false;
+        }
+        Entry<K, V> newEntry = new Entry<>(key, value);
+        this.myKeyList.add(newEntry.getKey());
+        this.myValueList.add(newEntry.getValue());
+        this.myEntryList.add(newEntry);
+        return true;
+    }
+
+    public V get(K key) {
+        return this.myValueList.get(this.myKeyList.indexOf(key));
+    }
+
     public MyMap() {
         this.myKeyList = new ArrayList<>();
         this.myValueList = new ArrayList<>();
