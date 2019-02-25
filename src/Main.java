@@ -9,7 +9,7 @@ public class Main {
         myMap.put(4, "D");
         myMap.put(5, "E");
         myMap.put(2, "T");
-        System.out.println(myMap.remove(3));
+        System.out.println(myMap.replace(3, "T"));
         System.out.println(myMap.get(3));
         System.out.println(myMap.get(2));
     }

@@ -35,9 +35,10 @@ public class MyMap<K, V> {
             return false;
         }
         Entry<K, V> newEntry = new Entry<>(key, value);
-        this.myKeyList.add(newEntry.getKey());
-        this.myValueList.add(newEntry.getValue());
         this.myEntryList.add(newEntry);
+        int index = this.myEntryList.size() - 1;
+        this.myValueList.add(this.myEntryList.get(index).getValue());
+        this.myKeyList.add(this.myEntryList.get(index).getKey());
         return true;
     }
 
@@ -52,6 +53,15 @@ public class MyMap<K, V> {
             this.myKeyList.remove(index);
             this.myEntryList.remove(index);
             return this.myValueList.remove(index);
+        }
+        return null;
+    }
+
+    public V replace(K key, V value) {
+        int index = this.myKeyList.indexOf(key);
+        if (index != -1) {
+            this.myEntryList.get(index).setValue(value);
+            return this.myValueList.set(index, value);
         }
         return null;
     }
