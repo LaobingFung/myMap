@@ -86,6 +86,10 @@ public class MyMap<K, V> {
         return index;
     }
 
+    public void clear() {
+        this.myEntryList.clear();
+    }
+
     public MyMap() {
         this.myEntryList = new ArrayList<>();
     }
