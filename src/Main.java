@@ -13,5 +13,8 @@ public class Main {
         System.out.println(myMap.get(3));
         System.out.println(myMap.remove(4));
         System.out.println(myMap.get(2));
+        System.out.println(myMap.entrySet());
+        System.out.println(myMap.keySet());
+        System.out.println(myMap.values());
     }
 }

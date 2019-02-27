@@ -1,6 +1,9 @@
 package main.java.fung.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MyMap<K, V> {
     private ArrayList<Entry<K, V>> myEntryList;
@@ -32,12 +35,12 @@ public class MyMap<K, V> {
                 return false;
             }
             Entry<K, V> objEntry = (Entry<K, V>) obj;
-            return this.getKey().equals(objEntry.getKey()) && this.getValue().equals(objEntry.getValue()) ;
+            return this.getKey().equals(objEntry.getKey()) && this.getValue().equals(objEntry.getValue());
         }
     }
 
     public boolean put(K key, V value) {
-        for (Entry<K, V> entry: this.myEntryList) {
+        for (Entry<K, V> entry : this.myEntryList) {
             if (entry.getKey().equals(key)) {
                 return false;
             }
@@ -48,7 +51,7 @@ public class MyMap<K, V> {
     }
 
     public V get(K key) {
-        for (Entry<K, V> entry: this.myEntryList) {
+        for (Entry<K, V> entry : this.myEntryList) {
             if (entry.getKey().equals(key)) {
                 return entry.getValue();
             }
@@ -88,6 +91,26 @@ public class MyMap<K, V> {
 
     public void clear() {
         this.myEntryList.clear();
+    }
+
+    public Set<Entry<K, V>> entrySet() {
+        return new HashSet(this.myEntryList);
+    }
+
+    public Set<K> keySet() {
+        HashSet<K> keySet = new HashSet<>();
+        for (Entry<K, V> entry : this.myEntryList) {
+            keySet.add(entry.getKey());
+        }
+        return keySet;
+    }
+
+    public ArrayList<V> values() {
+        ArrayList<V> values = new ArrayList<>();
+        for (Entry<K, V> entry : this.myEntryList) {
+            values.add(entry.getValue());
+        }
+        return values;
     }
 
     public MyMap() {
