@@ -57,13 +57,7 @@ public class MyMap<K, V> {
     }
 
     public V remove(K key) {
-        int index = -1;
-        for (int i = 0; i < this.myEntryList.size(); i++) {
-            if (this.myEntryList.get(i).getKey().equals(key)) {
-                index = i;
-                break;
-            }
-        }
+        int index = indexOf(key);
         if (index != -1) {
             return this.myEntryList.remove(index).getValue();
         }
@@ -71,13 +65,7 @@ public class MyMap<K, V> {
     }
 
     public V replace(K key, V value) {
-        int index = -1;
-        for (int i = 0; i < this.myEntryList.size(); i++) {
-            if (this.myEntryList.get(i).getKey().equals(key)) {
-                index = i;
-                break;
-            }
-        }
+        int index = indexOf(key);
         if (index != -1) {
             Entry<K, V> entry = this.myEntryList.get(index);
             V oldValue = entry.getValue();
@@ -85,6 +73,17 @@ public class MyMap<K, V> {
             return oldValue;
         }
         return null;
+    }
+
+    public int indexOf(K key) {
+        int index = -1;
+        for (int i = 0; i < this.myEntryList.size(); i++) {
+            if (this.myEntryList.get(i).getKey().equals(key)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     public MyMap() {
